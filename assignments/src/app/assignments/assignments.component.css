@@ -10,3 +10,7 @@ table, tr, td {
 .nonRendu {
   color:red;
 }
+
+table {
+  width: 100%;
+}

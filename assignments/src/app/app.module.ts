@@ -28,6 +28,9 @@ import { HttpClientModule } from '@angular/common/http';
 // search module
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+
 const routes: Routes = [
   {
     path: '',
@@ -67,9 +70,11 @@ const routes: Routes = [
     MatFormFieldModule, MatInputModule, MatDatepickerModule,
     MatNativeDateModule, MatListModule, MatCardModule,
     MatCheckboxModule, MatSlideToggleModule,
+    MatTableModule,
     RouterModule.forRoot(routes),
     HttpClientModule,
-    Ng2SearchPipeModule
+    Ng2SearchPipeModule,
+    MatPaginatorModule
   ],
   providers: [],
   bootstrap: [AppComponent]

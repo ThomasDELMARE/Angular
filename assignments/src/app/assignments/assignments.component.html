@@ -7,7 +7,41 @@
           Ajouter Assignment
     </button>
 </a>
-  <mat-list *ngFor="let a of assignments">
+
+<div>
+  <input class="form-control" type="text" name="search" [(ngModel)]="searchText" autocomplete="off" placeholder="Cherchez un devoir">
+</div>
+
+<table mat-table class="mat-elevation-z8"> 
+  <thead>
+  <tr>
+    <th>Nom</th>
+    <th>Date de rendu</th>
+    <th>Statut de rendu</th>
+    <th>Note</th>
+    <th>Professeur</th>
+    <th>Matière</th>
+    <th>Classe</th>
+    <th>Image</th>
+  </tr>
+  </thead>
+  <tbody >
+  <tr *ngFor="let a of assignments | filter:searchText">
+      <td>{{a.nom}}</td>
+      <td>{{a.dateDeRendu | date}}</td>
+      <td>{{a.rendu}}</td>
+      <td>{{a.note}}</td>
+      <td>{{a.prof}}</td>
+      <td>{{a.matiere}}</td>
+      <td>{{a.classe}}</td>
+      <td>
+        <img src="{{a.image}}" alt="Red dot" />
+      </td>
+  </tr>
+  </tbody>
+</table>
+
+  <mat-list *ngFor="let a of assignments | filter:searchText">
     <nav>
     <a routerLink="/assignment/{{a.id}}">
       <mat-list-item>

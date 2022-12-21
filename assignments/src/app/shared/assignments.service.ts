@@ -2,36 +2,16 @@ import { Injectable, ɵɵNgOnChangesFeature } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { Assignment } from '../assignments/assignment.model';
 import { LoggingService } from './logging.service';
-import { dataPourPeuplerBD } from './data';
 import { HttpClient } from '@angular/common/http';
 @Injectable({
   providedIn: 'root'
 })
 export class AssignmentsService {
-  assignments:Assignment[] = [
-    {
-      id:1,
-      nom: 'Devoir Angular de Mr Buffa',
-      dateDeRendu: new Date('2022-11-30'),
-      rendu:false
-    },
-    {
-      id:2,
-      nom: 'Devoir WebComponents de Mr Buffa',
-      dateDeRendu: new Date('2022-09-30'),
-      rendu:false
-    },
-    {
-      id:3,
-      nom: 'Devoir BD de Mr Mopolo',
-      dateDeRendu: new Date('2022-09-30'),
-      rendu:true
-    }
-  ]
   constructor(private loggingService:LoggingService,
               private http:HttpClient) { }
 
   uri = "http://localhost:8010/api/assignments";
+  shortUri = "http://localhost:8010/api";
 
   getAssignments():Observable<Assignment[]> {
     //return of(this.assignments);
@@ -79,6 +59,12 @@ export class AssignmentsService {
     return this.http.put<Assignment>(this.uri, assignment);
   }
 
+  getHighestId():Observable<any> {
+    return this.http.get<string>(`${this.shortUri}/highestId`);
+  }
+
+  /*
+
   peuplerBD() {
     dataPourPeuplerBD.forEach(a => {
       let nouvelAssignment = new Assignment();
@@ -93,4 +79,5 @@ export class AssignmentsService {
       })
     })
   }
+  */
 }

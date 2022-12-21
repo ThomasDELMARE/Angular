@@ -25,6 +25,9 @@ import { EditAssignmentComponent } from './assignments/edit-assignment/edit-assi
 import { AuthGuard } from './shared/auth.guard';
 import { HttpClientModule } from '@angular/common/http';
 
+// search module
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
+
 const routes: Routes = [
   {
     path: '',
@@ -65,7 +68,8 @@ const routes: Routes = [
     MatNativeDateModule, MatListModule, MatCardModule,
     MatCheckboxModule, MatSlideToggleModule,
     RouterModule.forRoot(routes),
-    HttpClientModule
+    HttpClientModule,
+    Ng2SearchPipeModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -10,6 +10,7 @@ import { Assignment } from './assignment.model';
 export class AssignmentsComponent implements OnInit {
   titre="Liste des devoirs";
   assignmentSelectionne!:Assignment;
+  searchText:string = "";
 
 
   assignments:Assignment[] = [];

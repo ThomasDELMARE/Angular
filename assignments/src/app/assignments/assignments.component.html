@@ -1,62 +1,155 @@
-<h2>{{titre}}</h2>
+<h2>{{ titre }}</h2>
 
-<main >
+<main>
   <a routerLink="/add">
-    <button mat-flat-button color="accent"
+    <button mat-flat-button color="accent">Ajouter un devoir</button>
+  </a>
+
+  <div fxLayout fxLayoutAlign="center center">
+    <mat-form-field fxFlex="40%">
+      <input
+        matInput
+        type="text"
+        (keyup)="rechercher($any($event))"
+        placeholder="Rechercher un devoir"
+      />
+    </mat-form-field>
+  </div>
+
+  <div class="mat-elevation-z8">
+    <table
+      mat-table
+      [dataSource]="dataSource"
+      matSort
+      (matSortChange)="announceSortChange($any($event))"
     >
-          Ajouter Assignment
-    </button>
-</a>
+      <ng-container matColumnDef="nom" >
+        <th class="tableProperty"
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          sortActionDescription="Trier par nom"
+        >
+          Nom
+        </th>
+        <td class="tableEntry" mat-cell *matCellDef="let a">{{ a.nom }}</td>
+      </ng-container>
 
-<div>
-  <input class="form-control" type="text" name="search" [(ngModel)]="searchText" autocomplete="off" placeholder="Cherchez un devoir">
-</div>
+      <ng-container matColumnDef="matiere">
+        <th class="tableProperty"
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          sortActionDescription="Trier par matière"
+        >
+          Matière
+        </th>
+        <td class="tableEntry" mat-cell *matCellDef="let a">{{ a.matiere }}</td>
+      </ng-container>
 
-<div class="mat-elevation-z8">
+      <ng-container matColumnDef="classe">
+        <th class="tableProperty"
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          sortActionDescription="Trier par classe"
+        >
+          Classe
+        </th>
+        <td class="tableEntry" mat-cell *matCellDef="let a">{{ a.classe }}</td>
+      </ng-container>
 
-  <table mat-table [dataSource]="assignments">
+      <ng-container matColumnDef="prof">
+        <th class="tableProperty"
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          sortActionDescription="Trier par professeur"
+        >
+          Professeur
+        </th>
+        <td class="tableEntry" mat-cell *matCellDef="let a">{{ a.prof }}</td>
+      </ng-container>
 
-    <ng-container matColumnDef="nom">
-      <th mat-header-cell *matHeaderCellDef> nom </th>
-      <td mat-cell *matCellDef="let a"> {{a.nom}} </td>
-    </ng-container>
-  
-    <ng-container matColumnDef="rendu">
-      <th mat-header-cell *matHeaderCellDef> rendu </th>
-      <td mat-cell *matCellDef="let a"> {{a.rendu}} </td>
-    </ng-container>
-  
-    <ng-container matColumnDef="note">
-      <th mat-header-cell *matHeaderCellDef> note </th>
-      <td mat-cell *matCellDef="let a"> {{a.note}} </td>
-    </ng-container>
-  
-    <ng-container matColumnDef="matiere">
-      <th mat-header-cell *matHeaderCellDef> matiere </th>
-      <td mat-cell *matCellDef="let a"> {{a.matiere}} </td>
-    </ng-container>
-  
-    <ng-container matColumnDef="details">
-      <th mat-header-cell *matHeaderCellDef> details </th>
-      <td mat-cell *matCellDef="let a" (click)="assignmentClique(a)"> DETAILS </td>
-    </ng-container>
-  
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr 
-      mat-row
-      (click)="assignmentClique(row)"
-      *matRowDef="let row; columns: displayedColumns;"
-    ></tr>
-  </table>
+      <ng-container matColumnDef="rendu">
+        <th class="tableProperty"
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          sortActionDescription="Trier par rendu"
+        >
+          Rendu
+        </th>
+        <td class="tableEntry" mat-cell *matCellDef="let a">{{ a.rendu }}</td>
+      </ng-container>
 
-  <mat-paginator  #paginator [pageSizeOptions]="[5, 10, 20]"
-                 showFirstLastButtons
-                 aria-label="Select page of periodic elements">
-  </mat-paginator>
-</div>
+      <ng-container matColumnDef="note">
+        <th class="tableProperty"
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          sortActionDescription="Trier par note"
+        >
+          Note
+        </th>
+        <td class="tableEntry" mat-cell *matCellDef="let a">{{ a.note }}</td>
+      </ng-container>
 
+      <ng-container matColumnDef="dateDeRendu">
+        <th class="tableProperty"
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          sortActionDescription="Trier par data"
+        >
+          Date de rendu
+        </th>
+        <td class="tableEntry" mat-cell *matCellDef="let a">{{ a.dateDeRendu | date:'medium' }}</td>
+      </ng-container>
 
-<!-- <table mat-table class="mat-elevation-z8"> 
+      <ng-container matColumnDef="image">
+        <th class="tableProperty"
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          sortActionDescription="Trier par image"
+        >
+          Image
+        </th>
+        <td class="tableEntry" mat-cell *matCellDef="let a">
+          
+          <div *ngIf="a.image != null;">
+            <img src={{a.image}} width="100" height="100">
+          </div>
+
+        </td>
+      </ng-container>
+
+      <!-- <ng-container matColumnDef="details">
+        <th mat-header-cell *matHeaderCellDef>details</th>
+        <td mat-cell *matCellDef="let a" (click)="assignmentClique(a)">
+          DETAILS
+        </td>
+      </ng-container> -->
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr
+        mat-row
+        (click)="assignmentClique(row)"
+        *matRowDef="let row; columns: displayedColumns"
+      ></tr>
+    </table>
+
+    <mat-paginator
+      [length]="totalAssignments"
+      [pageSizeOptions]="[10, 20, 30]"
+      showFirstLastButtons
+      aria-label="Select page of periodic elements"
+    >
+    </mat-paginator>
+  </div>
+
+  <!-- <table mat-table class="mat-elevation-z8"> 
   <thead>
   <tr>
     <th>Nom</th>

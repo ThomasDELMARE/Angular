@@ -2,8 +2,7 @@ import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
 import { AssignmentsService } from '../shared/assignments.service';
 import { Assignment } from './assignment.model';
 import {MatPaginator} from '@angular/material/paginator';
-import { MatTableDataSource } from '@angular/material/table';
-
+import { MatTableDataSource } from '@angular/material/table'
 
 
 
@@ -27,7 +26,7 @@ export class AssignmentsComponent implements OnInit, AfterViewInit {
    ngOnInit(): void {
     console.log("appelé à l'initialisation du composant");
     this.assignmentsService.getAssignments()
-    .subscribe(assignments => this.assignments = assignments);
+    .subscribe((assignments: Assignment[]) => this.assignments = assignments);
   }
 
   ngAfterViewInit() {

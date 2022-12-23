@@ -9,6 +9,7 @@ import { Assignment } from '../assignment.model';
   styleUrls: ['./add-assignment.component.css'],
 })
 export class AddAssignmentComponent implements OnInit {
+  titre="Formulaire d'ajout de devoirs";
   // Pour le formulaire
   nomDevoir = '';
   professeur = '';

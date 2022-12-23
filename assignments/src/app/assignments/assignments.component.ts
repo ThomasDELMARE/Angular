@@ -21,6 +21,10 @@ export class AssignmentsComponent implements AfterViewInit {
   assignments:Assignment[] = [];
   dataSource = new MatTableDataSource<Assignment>(this.assignments);
   totalAssignments: number = this.assignments.length;
+  filterValues: any = {};
+  rendu: boolean;
+  nonRendu: boolean;
+  filterBoolean: boolean;
 
   @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: false}) sort: MatSort;
@@ -32,8 +36,21 @@ export class AssignmentsComponent implements AfterViewInit {
     .subscribe((assignments: Assignment[]) => {
       this.assignments = assignments
       this.dataSource = new MatTableDataSource<Assignment>(assignments);
+
+      this.dataSource.filterPredicate = ((data: Assignment, filter: string): boolean => {
+        
+        if(filter == "true") this.filterBoolean = true;
+        if(filter == "false") this.filterBoolean = false;
+
+        
+        return data.rendu == this.filterBoolean;
+      })
+
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
+
+      this.filterValues = assignments;
+      console.log(this.filterValues)
     });
   }
 
@@ -52,5 +69,22 @@ export class AssignmentsComponent implements AfterViewInit {
 
   assignmentClique(assignment:Assignment){
     this.router.navigate(['.//assignment/'+ assignment.id]);
+  }
+
+  ajouterDevoir(){
+    this.router.navigate(['.//add/']);
+  }
+
+  applyFilter(isChecked: boolean, filterValue: string) {
+    if(!isChecked) {
+      this.dataSource.filter = "";
+    }
+    else {
+      this.dataSource.filter = filterValue; 
+    }
+
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
   }
 }

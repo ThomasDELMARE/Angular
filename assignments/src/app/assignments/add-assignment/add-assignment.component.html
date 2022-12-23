@@ -1,3 +1,7 @@
+<a routerLink="/add">
+  <h1 class="titre">{{titre}}</h1>
+</a>
+
 <form
   (submit)="onSubmit(); assignmentForm.reset()"
   ngForm
@@ -45,10 +49,9 @@
       [(ngModel)]="dateDeRendu"
       name="date"
     />
-    <mat-hint>MM/DD/YYYY</mat-hint>
     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
     <mat-datepicker #picker></mat-datepicker>
   </mat-form-field>
 
-  <button mat-stroked-button color="primary">Ajouter un devoir</button>
+  <button mat-stroked-button color="primary" [disabled]="((!nomDevoir)||(!professeur)||(!description)||(!matiere)||(!classe)||(!image)||(!dateDeRendu))"> Ajouter un devoir</button>
 </form>

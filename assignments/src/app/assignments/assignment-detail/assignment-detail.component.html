@@ -1,21 +1,97 @@
 <mat-card *ngIf="assignmentTransmis">
-  <mat-card-title>{{assignmentTransmis.nom}}</mat-card-title>
-  <mat-card-subtitle>{{assignmentTransmis.dateDeRendu | date}}</mat-card-subtitle>
-  <div id="bottom">
-    <mat-checkbox *ngIf="!assignmentTransmis.rendu" [checked]="assignmentTransmis.rendu" (click)="onAssignmentRendu()">
-      Devoir rendu
-    </mat-checkbox>
+  <h1 class="mainTitle">Détails du devoir {{ assignmentTransmis.nom }}</h1>
 
-    <nav>
-      <a routerLink="/assignment/{{assignmentTransmis.id}}/edit">
-        <button mat-raised-button color="primary">
-          EDIT
-        </button>
-      </a>
-    </nav>
+  <mat-card-title mat-card-title class="nomPropriété">
+    Date de rendu : 
+  </mat-card-title>
 
-    <button mat-raised-button color="warn" (click)="onDeleteAssignment()">
-      DELETE
-    </button>
-  </div>
+  <mat-card-subtitle class="valeurPropriété">
+    {{ assignmentTransmis.dateDeRendu | date }}
+  </mat-card-subtitle>
+
+  <mat-card-title mat-card-title class="nomPropriété">
+    Nom du professeur : 
+  </mat-card-title>
+
+  <mat-card-subtitle class="valeurPropriété">
+    {{ assignmentTransmis.prof }}
+  </mat-card-subtitle>
+
+  <mat-card-title mat-card-title class="nomPropriété"> 
+    Nom de la matière : 
+  </mat-card-title>
+
+  <mat-card-subtitle class="valeurPropriété">
+    {{ assignmentTransmis.matiere }}
+  </mat-card-subtitle>
+  
+  <mat-card-title mat-card-title class="nomPropriété">
+    Description du devoir : 
+  </mat-card-title>
+
+  <mat-card-subtitle class="valeurPropriété">
+    {{ assignmentTransmis.description }}
+  </mat-card-subtitle>
+  
+  <mat-card-title mat-card-title class="nomPropriété">
+    Classe : 
+  </mat-card-title>
+
+  <mat-card-subtitle class="valeurPropriété">
+    {{ assignmentTransmis.classe }}
+  </mat-card-subtitle>
+
+  <mat-card-title mat-card-title class="nomPropriété"> 
+    Statut de rendu : 
+  </mat-card-title>
+
+
+  <mat-card-subtitle *ngIf="assignmentTransmis.rendu; else nonsoumis" class="valeurPropriété">
+    {{assignmentTransmis.nom}} a été rendu.
+  </mat-card-subtitle>
+  <ng-template #nonsoumis>
+    <mat-card-subtitle class="valeurPropriété">
+      {{assignmentTransmis.nom}} n'a pas été rendu à temps.
+    </mat-card-subtitle>  
+  </ng-template>
+
+  <mat-card-title class="nomPropriété">
+    Note : 
+  </mat-card-title>
+
+  <mat-card-subtitle *ngIf="assignmentTransmis.rendu; else pasDeNote" class="valeurPropriété">
+    {{assignmentTransmis.note}}
+  </mat-card-subtitle>
+  <ng-template #pasDeNote>
+    <mat-card-subtitle class="valeurPropriété">
+      Le devoir n'a pas encore été soumis.
+    </mat-card-subtitle>
+  </ng-template>
+
+  <mat-checkbox
+    class="checkBoxRendu"
+    *ngIf="!assignmentTransmis.rendu"
+    [checked]="assignmentTransmis.rendu"
+    (click)="onAssignmentRendu()"
+  >
+    Devoir rendu
+  </mat-checkbox>
+
+  <button
+    class="actionButtons"
+    mat-flat-button
+    color="primary"
+    (click)="modifierAssignment(assignmentTransmis)"
+  >
+    Modifier
+  </button>
+
+  <button
+    class="actionButtons"
+    mat-flat-button
+    color="warn"
+    (click)="onDeleteAssignment()"
+  >
+    Supprimer
+  </button>
 </mat-card>

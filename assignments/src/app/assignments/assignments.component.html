@@ -1,12 +1,9 @@
-<h2>{{ titre }}</h2>
-
+<a routerLink="/home">
+  <h1 class="titre">{{titre}}</h1>
+</a>
 <main>
-  <a routerLink="/add">
-    <button mat-flat-button color="accent">Ajouter un devoir</button>
-  </a>
-
-  <div fxLayout fxLayoutAlign="center center">
-    <mat-form-field fxFlex="40%">
+  <div >
+    <mat-form-field class="recherche">
       <input
         matInput
         type="text"
@@ -14,8 +11,13 @@
         placeholder="Rechercher un devoir"
       />
     </mat-form-field>
+
+    <button mat-flat-button color="primary" class="addButton" (click)="ajouterDevoir()">Ajouter un devoir</button>
+    
+    <mat-checkbox class="checkBox" id="checkBoxNonRendu" [(ngModel)]="nonRendu" (change)="applyFilter(nonRendu?true:false, 'false')">Afficher seulement les devoirs non rendus</mat-checkbox>
   </div>
 
+  
   <div class="mat-elevation-z8">
     <table
       mat-table
@@ -80,7 +82,16 @@
         >
           Rendu
         </th>
-        <td class="tableEntry" mat-cell *matCellDef="let a">{{ a.rendu }}</td>
+        <td class="tableEntry" mat-cell *matCellDef="let a">
+          <p *ngIf="a.rendu; else nonsoumis" class="rendu">
+            {{a.nom}} a été rendu.
+          </p>
+          <ng-template #nonsoumis>
+            <p class="nonRendu">
+              {{a.nom}} n'a pas été rendu à temps.
+            </p>
+          </ng-template>
+        </td>
       </ng-container>
 
       <ng-container matColumnDef="note">
@@ -92,7 +103,17 @@
         >
           Note
         </th>
-        <td class="tableEntry" mat-cell *matCellDef="let a">{{ a.note }}</td>
+        <td class="tableEntry" mat-cell *matCellDef="let a">
+
+          <div *ngIf="a.rendu; else nonsoumis">
+            {{a.note}}
+          </div>
+          <ng-template #nonsoumis>
+            <p>
+              Le devoir n'a pas encore été soumis.
+            </p>
+          </ng-template>
+        </td>
       </ng-container>
 
       <ng-container matColumnDef="dateDeRendu">

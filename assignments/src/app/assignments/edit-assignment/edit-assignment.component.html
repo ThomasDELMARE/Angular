@@ -1,17 +1,55 @@
 <div class="container" *ngIf="assignment">
-  <h1>Edition de l'assignment {{assignment.nom}}</h1>
+  <h1 class="mainTitle">Edition de l'assignment {{assignment.nom}}</h1>
   <form ngForm class="form" #formupdate (submit)="onSaveAssignment(); formupdate.reset(); ">
+
     <mat-form-field>
-      <input matInput placeholder="Edition du nom" [(ngModel)]="nomAssignment" name="assignment-name">
+      <mat-label>Nom du devoir</mat-label>
+      <input matInput placeholder="Edition du nom du devoir" [(ngModel)]="nomDevoir" name="nom" />
     </mat-form-field>
+  
     <mat-form-field>
-      <input matInput [matDatepicker]="picker" placeholder="Edition de la date" [(ngModel)]="dateDeRendu" name="date">
-      <mat-datepicker-toggle matSuffix [for]="picker">
-      </mat-datepicker-toggle>
+      <mat-label>Nom du professeur</mat-label>
+      <input matInput [(ngModel)]="professeur" name="professeur" />
+    </mat-form-field>
+  
+    <mat-form-field>
+      <mat-label>Description du devoir</mat-label>
+      <input matInput [(ngModel)]="description" name="description" />
+    </mat-form-field>
+  
+  
+    <mat-form-field>
+      <mat-label>Nom de la matière</mat-label>
+      <input matInput [(ngModel)]="matiere" name="matiere" />
+    </mat-form-field>
+  
+    
+    <mat-form-field>
+      <mat-label>Classe</mat-label>
+      <input matInput [(ngModel)]="classe" name="classe" />
+    </mat-form-field>
+  
+    
+    <mat-form-field>
+      <mat-label>Lien de la photo du professeur</mat-label>
+      <input matInput [(ngModel)]="image" name="image" />
+    </mat-form-field>
+  
+    <mat-form-field appearance="fill">
+      <mat-label>Date de rendu</mat-label>
+      <input
+        matInput
+        placeholder="Edition de la date de rendu"
+        [matDatepicker]="picker"
+        [(ngModel)]="dateDeRendu"
+        name="date"
+      />
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
-    <button mat-raised-button color="primary" [disabled]="((!nomAssignment)||(!dateDeRendu))">
-      Sauver
+
+    <button mat-raised-button color="primary"  [disabled]="((!nomDevoir)||(!professeur)||(!description)||(!matiere)||(!classe)||(!image)||(!dateDeRendu))">
+      Sauvegarder
     </button>
   </form>
  </div>

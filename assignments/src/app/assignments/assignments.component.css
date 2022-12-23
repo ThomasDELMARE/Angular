@@ -12,6 +12,34 @@ table {
   width: 100%;
 }
 
+.addButton {
+  margin-left: 45%;
+  width: 10%;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.recherche {
+  margin-left: 30%;
+  width: 40%;
+  text-align: center;
+  margin-bottom:0px;
+}
+
+.titre {
+  margin-left: 30%;
+  width: 40%;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.checkBox {
+  margin-left: 30%;
+  width: 40%;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
 .mat-mdc-row .mat-mdc-cell {
   border-top: 1px solid transparent;
   border-bottom: 1px solid transparent;

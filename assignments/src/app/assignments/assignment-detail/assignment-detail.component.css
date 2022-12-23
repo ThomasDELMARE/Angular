@@ -3,3 +3,28 @@
   align-items: flex-end;
   justify-content: space-between;
 }
+
+.checkBoxRendu {
+  margin-left: 46%;
+  margin-top: 10px;
+}
+
+.nomPropriété {
+  text-decoration: underline;
+  margin-left:3%
+}
+
+.valeurPropriété {
+  margin-left:4%;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.mainTitle {
+  text-align: center;
+}
+
+.actionButtons {
+  margin-left: 500px;
+  margin: 10px;
+}

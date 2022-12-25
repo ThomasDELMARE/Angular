@@ -2,13 +2,13 @@ let express = require('express');
 let app = express();
 let bodyParser = require('body-parser');
 let assignment = require('./routes/assignments');
+let user = require('./routes/users');
 
 let mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 //mongoose.set('debug', true);
 
 // remplacer toute cette chaine par l'URI de connexion à votre propre base dans le cloud s
-//const uri = 'mongodb+srv://mb:P7zM3VePm0caWA1L@cluster0.zqtee.mongodb.net/assignments?retryWrites=true&w=majority';
 const uri = 'mongodb+srv://tdelmare:databasePassword2022@cluster0.bqygo1v.mongodb.net/assignments?retryWrites=true&w=majority';
 
 const options = {
@@ -41,7 +41,7 @@ app.use(bodyParser.json());
 
 let port = process.env.PORT || 8010;
 
-// les routes
+// les routes pour les assignments
 const prefix = '/api';
 
 app.route(prefix + '/assignments')
@@ -58,6 +58,21 @@ app.route(prefix + '/assignments')
 
 app.route(prefix + '/highestId')
   .get(assignment.getHighestId);
+
+// Les routes pour les utilisateurs
+app.route(prefix + '/users')
+  .get(user.getUsers);
+
+app.route(prefix + '/users')
+  .post(user.postUser)
+  .put(user.updateUser);
+
+app.route(prefix + '/users/fetch')
+  .get(user.getUser)
+
+app.route(prefix + '/usersHighestId')
+  .get(user.getHighestUserId);
+
 
 // On démarre le serveur
 app.listen(port, "0.0.0.0");

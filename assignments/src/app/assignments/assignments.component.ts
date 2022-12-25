@@ -1,5 +1,5 @@
 import { Component, AfterViewInit, ViewChild } from '@angular/core';
-import { AssignmentsService } from '../shared/assignments.service';
+import { AssignmentsService } from '../shared/services/assignments.service';
 import {MatPaginator} from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table'
 import { Assignment } from './assignment.model';

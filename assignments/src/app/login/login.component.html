@@ -1,0 +1,16 @@
+<div class="example-container">
+    <mat-form-field appearance="fill">
+        <mat-label>Identifiant</mat-label>
+        <input [(ngModel)]="login" matInput>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Entrez votre mot de passe</mat-label>
+      <input matInput [(ngModel)]="password" [type]="hide ? 'password' : 'text'">
+      <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Cacher le mot de passe'" [attr.aria-pressed]="hide">
+        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+      </button>
+    </mat-form-field>
+
+    <button type="button" mat-raised-button color="primary" (click)="loginUser()">Se connecter</button>
+</div>

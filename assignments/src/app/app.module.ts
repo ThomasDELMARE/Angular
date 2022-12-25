@@ -21,7 +21,6 @@ import { AddAssignmentComponent } from './assignments/add-assignment/add-assignm
 import { Routes }  from '@angular/router';
 import { RouterModule } from '@angular/router';
 import { EditAssignmentComponent } from './assignments/edit-assignment/edit-assignment.component';
-import { AuthGuard } from './shared/auth.guard';
 import { HttpClientModule } from '@angular/common/http';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 
@@ -32,23 +31,32 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
 import { MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
+import { LoginComponent } from './login/login.component';
+import { LoginGuard } from './shared/guards/login.guard';
+import { AuthGuard } from './shared/guards/auth.guard';
+import { AdminGuard } from './shared/guards/admin.guard';
+import { AuthService } from './shared/services/auth.service';
 
 const routes: Routes = [
   {
     path: '',
-    component: AssignmentsComponent
+    component: LoginComponent,
+    canActivate: [LoginGuard]
   },
   {
     path: 'home',
-    component: AssignmentsComponent
+    component: AssignmentsComponent,
+    canActivate:[AuthGuard]
   },
   {
     path: 'add',
-    component: AddAssignmentComponent
+    component: AddAssignmentComponent,
+    canActivate:[AuthGuard]
   },
   {
     path: 'assignment/:id',
-    component: AssignmentDetailComponent
+    component: AssignmentDetailComponent,
+    canActivate:[AuthGuard]
   },
   {
     path: 'assignment/:id/edit',
@@ -63,7 +71,8 @@ const routes: Routes = [
     AssignmentsComponent,
     AssignmentDetailComponent,
     AddAssignmentComponent,
-    EditAssignmentComponent
+    EditAssignmentComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -80,7 +89,9 @@ const routes: Routes = [
     MatSortModule,
     MatSnackBarModule
   ],
-  providers: [],
+  providers: [
+    AuthService, AuthGuard, AdminGuard, LoginGuard
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

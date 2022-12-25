@@ -1,6 +1,6 @@
 import { Injectable, ɵɵNgOnChangesFeature } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { Assignment } from '../assignments/assignment.model';
+import { Assignment } from '../../assignments/assignment.model';
 import { LoggingService } from './logging.service';
 import { HttpClient } from '@angular/common/http';
 @Injectable({

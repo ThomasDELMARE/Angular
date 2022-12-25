@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AuthService } from './shared/auth.service';
+import { AuthService } from './shared/services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -9,11 +9,11 @@ import { AuthService } from './shared/auth.service';
 export class AppComponent {
   title = 'Gestion des assignments';
 
-  constructor(private authService:AuthService) {}
+  constructor(private authService: AuthService) {}
 
   login() {
     if(!this.authService.loggedIn) {
-      this.authService.logIn();
+      this.authService.logIn("test", "ui");
     } else {
       this.authService.logOut();
     }

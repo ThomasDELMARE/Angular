@@ -17,9 +17,11 @@ export class AuthService {
   // Dans la vraie vie (dans le projet à faire), on
   // passerait login et password.
   logIn(login:string, password:string) {
+    const config = require("../../config/auth.config.js");
+    var jwt = require('jsonwebtoken');
+
     console.log("LogIN function value :", this.loggedIn)
     console.log("LogIN params :", login, password)
-
     
     this.loginService.getUser(login, password)
     .subscribe((userFetched) => {
@@ -36,6 +38,11 @@ export class AuthService {
         else {
           console.log("User is not admin")
         }
+
+        // Create jwt token and store it in local storage
+        var token = jwt.sign({ login:userFetched?.login, password: userFetched?.password }, config.secret, {});
+        localStorage.setItem("jwtToken", token);
+
         this.router.navigate(['./home']);
       }
       else{
@@ -61,6 +68,21 @@ export class AuthService {
   }
 
   isLoggedIn(): Promise<boolean> {
+    // On a un JWT token dans le local storage
+    if(localStorage.getItem("jwtToken") != null) {
+      const config = require("../../config/auth.config.js");
+      var jwt = require('jsonwebtoken');
+      var token = localStorage.getItem("jwtToken");
+
+      jwt.verify(token, config.secret, (err: any, decoded: { login: any, password:any; }) => {
+        if (!err) {
+          var login = decoded.login;
+          var password = decoded.password;
+          login(login, password);
+        }
+      });
+    }
+    
     console.log("Logged in value via service: ", this.loggedIn)
     return new Promise((resolve, reject) => {
       resolve(this.loggedIn);

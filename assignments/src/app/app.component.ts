@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from './shared/services/auth.service';
 
 @Component({
@@ -8,12 +9,17 @@ import { AuthService } from './shared/services/auth.service';
 })
 export class AppComponent {
   title = 'Gestion des assignments';
+  isLogin: boolean;
 
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService, private router: Router) {
+    this.router.url === '' ?
+      this.isLogin = false :
+      this.isLogin = true;
+  }
 
   login() {
     if(!this.authService.loggedIn) {
-      this.authService.logIn("test", "ui");
+      this.authService.logIn("test", "test");
     } else {
       this.authService.logOut();
     }

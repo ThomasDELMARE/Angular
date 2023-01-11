@@ -2,6 +2,10 @@ section {
   display: table;
 }
 
+h1 {
+  margin: 10px;
+}
+
 .example-label {
   display: table-cell;
   font-size: 14px;

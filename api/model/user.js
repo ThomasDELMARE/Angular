@@ -5,7 +5,8 @@ let usersSchema = Schema({
     id: Number,
     admin: Boolean,
     login: String,
-    password: String
+    password: String,
+    jwtToken: String
 });
 
 // C'est à travers ce modèle Mongoose qu'on pourra faire le CRUD

@@ -15,9 +15,16 @@ function getUsers(req, res){
 function getUser(req, res){
     loginRequest = req.query.login;
     passwordRequest = req.query.password;
-
+    const config = require("../config/auth.config.js");
+    var jwt = require('jsonwebtoken');
+    
     User.findOne({login: loginRequest, password: passwordRequest}, (err, user) =>{
         if(err){res.send(err)}
+        
+        // Create jwt token and store it in local storage
+        var token = jwt.sign({ login:user?.login, password: user?.password }, config.secret, {});
+        user.jwtToken = token;
+        console.log(user)
         res.json(user);
     })
 }

@@ -8,6 +8,10 @@ th.mat-sort-header-sorted {
   color:red;
 }
 
+.logoutButton {
+  float: right;
+}
+
 .main-wrapper {
   padding-bottom: 5px;
 }

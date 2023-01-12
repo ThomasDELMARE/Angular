@@ -9,13 +9,9 @@ import { AuthService } from './shared/services/auth.service';
 })
 export class AppComponent {
   title = 'Gestion des assignments';
-  isLogin: boolean;
+  isLogin: boolean = false;
 
-  constructor(private authService: AuthService,  private router: Router) {
-  this.router.url === '' ?
-      this.isLogin = false :
-      this.isLogin = true;
-  }
+  constructor(private authService: AuthService,  private router: Router) {}
 
   logOut() {
     console.log("Déconnexion demandée")

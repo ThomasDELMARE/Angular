@@ -6,6 +6,7 @@ import { Assignment } from './assignment.model';
 import { MatSort, Sort } from '@angular/material/sort';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import {Router} from '@angular/router';
+import { AuthService } from '../shared/services/auth.service';
 
 @Component({
   selector: 'app-assignments',
@@ -29,7 +30,7 @@ export class AssignmentsComponent implements AfterViewInit, OnInit {
   @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: false}) sort: MatSort;
   
-  constructor(private assignmentsService:AssignmentsService, private _liveAnnouncer: LiveAnnouncer, private router: Router) { }
+  constructor(private assignmentsService:AssignmentsService, private _liveAnnouncer: LiveAnnouncer, private router: Router, private authService: AuthService) { }
 
   ngOnInit() {
     this.dataSource.sortData = this.sortData();
@@ -148,5 +149,11 @@ export class AssignmentsComponent implements AfterViewInit, OnInit {
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
+  }
+
+  logOut() {
+    console.log("Déconnexion demandée")
+    this.authService.logOut();
+    this.router.navigate(['./']);
   }
 }

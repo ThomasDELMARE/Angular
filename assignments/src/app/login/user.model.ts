@@ -3,5 +3,6 @@ export class User {
   id!:number;
   admin!: boolean;
   password!: string;
+  jwtToken!: string;
   login!: string;
 }

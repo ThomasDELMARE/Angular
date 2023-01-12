@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthService } from './shared/services/auth.service';
 
 @Component({
@@ -9,13 +10,11 @@ import { AuthService } from './shared/services/auth.service';
 export class AppComponent {
   title = 'Gestion des assignments';
 
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService,  private router: Router) {}
 
-  login() {
-    if(!this.authService.loggedIn) {
-      this.authService.logIn("test", "ui");
-    } else {
-      this.authService.logOut();
-    }
+  logOut() {
+    console.log("Déconnexion demandée")
+    this.authService.logOut();
+    this.router.navigate(['./']);
   }
 }

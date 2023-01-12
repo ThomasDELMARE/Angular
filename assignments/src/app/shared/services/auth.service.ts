@@ -2,10 +2,12 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from '../../login/user.model';
 import { LoginService } from './login.service';
+import jwt_decode from "jwt-decode";
 
 @Injectable({
   providedIn: 'root',
 })
+
 
 export class AuthService {
   loggedIn = false;
@@ -17,9 +19,6 @@ export class AuthService {
   // Dans la vraie vie (dans le projet à faire), on
   // passerait login et password.
   logIn(login:string, password:string) {
-    const config = require("../../config/auth.config.js");
-    var jwt = require('jsonwebtoken');
-
     console.log("LogIN function value :", this.loggedIn)
     console.log("LogIN params :", login, password)
     
@@ -39,11 +38,14 @@ export class AuthService {
           console.log("User is not admin")
         }
 
-        // Create jwt token and store it in local storage
-        var token = jwt.sign({ login:userFetched?.login, password: userFetched?.password }, config.secret, {});
-        localStorage.setItem("jwtToken", token);
+        console.log(this.user)
 
-        this.router.navigate(['./home']);
+        localStorage.setItem("jwtToken", this.user.jwtToken);
+
+        // On ne veut rediriger sur Home que lorsque l'on fait une connexion depuis la page de connexion
+        if(this.router.url == "/"){
+          this.router.navigate(['./home']);
+        }
       }
       else{
         console.log("User not fetched")
@@ -55,6 +57,7 @@ export class AuthService {
   }
 
   logOut() {
+    localStorage.removeItem("jwtToken");
     this.loggedIn = false;
     this.userIsAdmin = false;
   }
@@ -69,18 +72,25 @@ export class AuthService {
 
   isLoggedIn(): Promise<boolean> {
     // On a un JWT token dans le local storage
-    if(localStorage.getItem("jwtToken") != null) {
-      const config = require("../../config/auth.config.js");
-      var jwt = require('jsonwebtoken');
-      var token = localStorage.getItem("jwtToken");
+    var token = localStorage.getItem("jwtToken");
 
-      jwt.verify(token, config.secret, (err: any, decoded: { login: any, password:any; }) => {
-        if (!err) {
-          var login = decoded.login;
-          var password = decoded.password;
-          login(login, password);
-        }
-      });
+    if(token != null) {
+      var decryptedToken;
+
+      try {
+        decryptedToken = jwt_decode(token) as JwtToken;
+      } catch(Error) {
+        decryptedToken = null;
+      }
+
+      console.log(decryptedToken);
+
+      if(decryptedToken != null) {
+        var login = decryptedToken.login;
+        var password = decryptedToken.password;
+
+        this.logIn(login, password);
+      }
     }
     
     console.log("Logged in value via service: ", this.loggedIn)
@@ -95,4 +105,10 @@ export class AuthService {
       resolve(this.userIsAdmin);
     });
   }
+
+}
+
+export interface JwtToken {
+  login : string,
+  password : string
 }

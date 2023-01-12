@@ -8,22 +8,49 @@ th.mat-sort-header-sorted {
   color:red;
 }
 
+.main-wrapper {
+  padding-bottom: 5px;
+}
+
 table {
   width: 100%;
 }
 
+.assignement-table {
+  margin: 15px;
+}
+
+table, .mat-table, .mat-mdc-table {
+  border-collapse: collapse;
+  border-top-left-radius: 1em;
+  border-top-right-radius: 1em;
+  overflow: hidden;
+}
+
+th, td {
+  overflow: hidden;
+  padding: 10px 0;
+}
+
+.table-action {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
 .addButton {
-  margin-left: 45%;
-  width: 10%;
+  width: 20%;
   text-align: center;
   margin-bottom: 10px;
 }
 
 .recherche {
-  margin-left: 30%;
   width: 40%;
   text-align: center;
   margin-bottom:0px;
+  margin-top: 5px;
 }
 
 .titre {
@@ -34,7 +61,6 @@ table {
 }
 
 .checkBox {
-  margin-left: 30%;
   width: 40%;
   text-align: center;
   margin-bottom: 10px;

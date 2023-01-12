@@ -8,12 +8,13 @@ import { AuthService } from '../services/auth.service';
   providedIn: 'root'
 })
 export class AuthGuard implements CanActivate {
-  constructor(private authService:AuthService, private _snackBar: MatSnackBar, private router: Router) { }
+  constructor(
+    private authService:AuthService, 
+    private _snackBar: MatSnackBar,
+    private router: Router
+  ) { }
 
-  canActivate(
-    route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot,
-    ): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
+  canActivate(): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
       return this.authService.isLoggedIn()
       .then((isLogged: boolean)  => {
         console.log("isLogged guard : " + isLogged);
@@ -24,6 +25,7 @@ export class AuthGuard implements CanActivate {
           this._snackBar.open("Navigation refusée, connectez-vous avec un compte administrateur", "Fermer", {
             duration: 3000
           });
+          this.router.navigate(['']);
           return false;
         }
       })

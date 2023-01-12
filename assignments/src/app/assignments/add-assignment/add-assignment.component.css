@@ -1,7 +1,20 @@
+.content-wrappper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 .form {
+  margin-top: 20px;
   display:flex;
   flex-direction: column;
-  margin:5px;
+  align-items: center;
+  justify-content: center;
+}
+
+mat-form-field {
+  width: 70%;
 }
 
 .titre {

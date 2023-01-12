@@ -35,7 +35,8 @@ export class AuthService {
           this.loggedAsAdmin();
         }
         else {
-          console.log("User is not admin")
+          console.log("User is not admin");
+          this.logOut()
         }
 
         console.log(this.user)

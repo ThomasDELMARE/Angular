@@ -1,8 +1,8 @@
 <a routerLink="/home">
   <h1 class="titre">{{titre}}</h1>
 </a>
-<main>
-  <div >
+<main class="main-wrapper">
+  <div class="table-action">
     <mat-form-field class="recherche">
       <input
         matInput
@@ -18,7 +18,7 @@
   </div>
 
   
-  <div class="mat-elevation-z8">
+  <div class="assignement-table mat-elevation-z8">
     <table
       mat-table
       [dataSource]="dataSource"
@@ -32,21 +32,9 @@
           mat-sort-header
           sortActionDescription="Trier par nom"
         >
-          Nom
+          Nom de l'étudiant
         </th>
         <td class="tableEntry" mat-cell *matCellDef="let a">{{ a.nom }}</td>
-      </ng-container>
-
-      <ng-container matColumnDef="matiere">
-        <th class="tableProperty"
-          mat-header-cell
-          *matHeaderCellDef
-          mat-sort-header
-          sortActionDescription="Trier par matière"
-        >
-          Matière
-        </th>
-        <td class="tableEntry" mat-cell *matCellDef="let a">{{ a.matiere }}</td>
       </ng-container>
 
       <ng-container matColumnDef="classe">
@@ -61,37 +49,16 @@
         <td class="tableEntry" mat-cell *matCellDef="let a">{{ a.classe }}</td>
       </ng-container>
 
-      <ng-container matColumnDef="prof">
+      <ng-container matColumnDef="matiere">
         <th class="tableProperty"
           mat-header-cell
           *matHeaderCellDef
           mat-sort-header
-          sortActionDescription="Trier par professeur"
+          sortActionDescription="Trier par matière"
         >
-          Professeur
+          Matière
         </th>
-        <td class="tableEntry" mat-cell *matCellDef="let a">{{ a.prof }}</td>
-      </ng-container>
-
-      <ng-container matColumnDef="rendu">
-        <th class="tableProperty"
-          mat-header-cell
-          *matHeaderCellDef
-          mat-sort-header
-          sortActionDescription="Trier par rendu"
-        >
-          Rendu
-        </th>
-        <td class="tableEntry" mat-cell *matCellDef="let a">
-          <p *ngIf="a.rendu; else nonsoumis" class="rendu">
-            {{a.nom}} a été rendu.
-          </p>
-          <ng-template #nonsoumis>
-            <p class="nonRendu">
-              {{a.nom}} n'a pas été rendu à temps.
-            </p>
-          </ng-template>
-        </td>
+        <td class="tableEntry" mat-cell *matCellDef="let a">{{ a.matiere }}</td>
       </ng-container>
 
       <ng-container matColumnDef="note">
@@ -116,6 +83,27 @@
         </td>
       </ng-container>
 
+      <ng-container matColumnDef="rendu">
+        <th class="tableProperty"
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          sortActionDescription="Trier par rendu"
+        >
+          Rendu
+        </th>
+        <td class="tableEntry" mat-cell *matCellDef="let a">
+          <p *ngIf="a.rendu; else nonsoumis" class="rendu">
+            {{a.nom}} a été rendu.
+          </p>
+          <ng-template #nonsoumis>
+            <p class="nonRendu">
+              {{a.nom}} n'a pas été rendu à temps.
+            </p>
+          </ng-template>
+        </td>
+      </ng-container>
+
       <ng-container matColumnDef="dateDeRendu">
         <th class="tableProperty"
           mat-header-cell
@@ -128,12 +116,22 @@
         <td class="tableEntry" mat-cell *matCellDef="let a">{{ a.dateDeRendu | date:'medium' }}</td>
       </ng-container>
 
-      <ng-container matColumnDef="image">
+      <ng-container matColumnDef="prof">
         <th class="tableProperty"
           mat-header-cell
           *matHeaderCellDef
           mat-sort-header
-          sortActionDescription="Trier par image"
+          sortActionDescription="Trier par professeur"
+        >
+          Professeur
+        </th>
+        <td class="tableEntry" mat-cell *matCellDef="let a">{{ a.prof }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="image">
+        <th class="tableProperty"
+          mat-header-cell
+          *matHeaderCellDef
         >
           Image
         </th>

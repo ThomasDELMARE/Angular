@@ -40,8 +40,7 @@ import { AuthService } from './shared/services/auth.service';
 const routes: Routes = [
   {
     path: '',
-    component: LoginComponent,
-    canActivate: [LoginGuard]
+    component: LoginComponent
   },
   {
     path: 'home',

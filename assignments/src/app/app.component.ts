@@ -11,17 +11,15 @@ export class AppComponent {
   title = 'Gestion des assignments';
   isLogin: boolean;
 
-  constructor(private authService: AuthService, private router: Router) {
-    this.router.url === '' ?
+  constructor(private authService: AuthService,  private router: Router) {
+  this.router.url === '' ?
       this.isLogin = false :
       this.isLogin = true;
   }
 
-  login() {
-    if(!this.authService.loggedIn) {
-      this.authService.logIn("test", "test");
-    } else {
-      this.authService.logOut();
-    }
+  logOut() {
+    console.log("Déconnexion demandée")
+    this.authService.logOut();
+    this.router.navigate(['./']);
   }
 }

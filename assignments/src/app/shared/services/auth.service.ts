@@ -2,10 +2,12 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from '../../login/user.model';
 import { LoginService } from './login.service';
+import jwt_decode from "jwt-decode";
 
 @Injectable({
   providedIn: 'root',
 })
+
 
 export class AuthService {
   loggedIn = false;
@@ -19,7 +21,6 @@ export class AuthService {
   logIn(login:string, password:string) {
     console.log("LogIN function value :", this.loggedIn)
     console.log("LogIN params :", login, password)
-
     
     this.loginService.getUser(login, password)
     .subscribe((userFetched) => {
@@ -37,7 +38,15 @@ export class AuthService {
           console.log("User is not admin");
           this.logOut()
         }
-        this.router.navigate(['./home']);
+
+        console.log(this.user)
+
+        localStorage.setItem("jwtToken", this.user.jwtToken);
+
+        // On ne veut rediriger sur Home que lorsque l'on fait une connexion depuis la page de connexion
+        if(this.router.url == "/"){
+          this.router.navigate(['./home']);
+        }
       }
       else{
         console.log("User not fetched")
@@ -49,6 +58,7 @@ export class AuthService {
   }
 
   logOut() {
+    localStorage.removeItem("jwtToken");
     this.loggedIn = false;
     this.userIsAdmin = false;
   }
@@ -62,6 +72,28 @@ export class AuthService {
   }
 
   isLoggedIn(): Promise<boolean> {
+    // On a un JWT token dans le local storage
+    var token = localStorage.getItem("jwtToken");
+
+    if(token != null) {
+      var decryptedToken;
+
+      try {
+        decryptedToken = jwt_decode(token) as JwtToken;
+      } catch(Error) {
+        decryptedToken = null;
+      }
+
+      console.log(decryptedToken);
+
+      if(decryptedToken != null) {
+        var login = decryptedToken.login;
+        var password = decryptedToken.password;
+
+        this.logIn(login, password);
+      }
+    }
+    
     console.log("Logged in value via service: ", this.loggedIn)
     return new Promise((resolve, reject) => {
       resolve(this.loggedIn);
@@ -74,4 +106,10 @@ export class AuthService {
       resolve(this.userIsAdmin);
     });
   }
+
+}
+
+export interface JwtToken {
+  login : string,
+  password : string
 }

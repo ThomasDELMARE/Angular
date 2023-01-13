@@ -1,6 +1,6 @@
 import { NgModule} from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDividerModule } from '@angular/material/divider';
@@ -23,6 +23,8 @@ import { RouterModule } from '@angular/router';
 import { EditAssignmentComponent } from './assignments/edit-assignment/edit-assignment.component';
 import { HttpClientModule } from '@angular/common/http';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatStep } from '@angular/material/stepper';
+
 
 // search module
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
@@ -77,6 +79,7 @@ const routes: Routes = [
   imports: [
     BrowserModule,
     BrowserAnimationsModule, FormsModule,
+    ReactiveFormsModule,
     MatButtonModule, MatIconModule, MatDividerModule,
     MatFormFieldModule, MatInputModule, MatDatepickerModule,
     MatNativeDateModule, MatListModule, MatCardModule,

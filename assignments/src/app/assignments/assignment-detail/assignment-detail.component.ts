@@ -2,7 +2,8 @@ import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AssignmentsService } from 'src/app/shared/services/assignments.service';
 import { Assignment } from '../assignment.model';
-import {MatSnackBar, MatSnackBarRef} from '@angular/material/snack-bar';
+import { MatSnackBar, MatSnackBarRef } from '@angular/material/snack-bar';
+import { AuthService } from 'src/app/shared/services/auth.service';
 
 @Component({
   selector: 'app-assignment-detail',
@@ -12,21 +13,28 @@ import {MatSnackBar, MatSnackBarRef} from '@angular/material/snack-bar';
 
 export class AssignmentDetailComponent implements OnInit {
   assignmentTransmis!: Assignment | undefined;
+  isAdmin: boolean;
 
   constructor(
     private assignmentsService: AssignmentsService,
     private route: ActivatedRoute,
     private router: Router,
-    private _snackBar: MatSnackBar
-  ) {}
+    private _snackBar: MatSnackBar,
+    private authService: AuthService
+  ) { }
 
   // Appelé AVANT l'affichage du composant, fait partie du
   // cycle de vie du composant
   ngOnInit(): void {
+    this.authService.isAdmin()
+      .then((isAdmin: any) => {
+        this.isAdmin = isAdmin;
+      });
+
     this.getAssignment();
   }
 
-  openSnackBar(message:string) {
+  openSnackBar(message: string) {
     this._snackBar.open(message, "Fermer", {
       duration: 3000
     });

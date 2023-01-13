@@ -21,7 +21,7 @@ export class AdminGuard implements CanActivate {
           return true;
         } else {
           this._snackBar.open("Navigation refusée, connectez-vous avec un compte administrateur", "Fermer", {
-            duration: 3000
+            duration: 2000
           });
           return false;
         }

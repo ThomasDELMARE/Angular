@@ -36,7 +36,6 @@ export class AuthService {
         }
         else {
           console.log("User is not admin");
-          this.logOut()
         }
 
         console.log(this.user)
@@ -101,7 +100,6 @@ export class AuthService {
   }
 
   isAdmin(): Promise<boolean> {
-    console.log("Admin in value via service: ", this.loggedIn)
     return new Promise((resolve, reject) => {
       resolve(this.userIsAdmin);
     });

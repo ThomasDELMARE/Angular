@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AssignmentsService } from 'src/app/shared/services/assignments.service';
 import { Assignment } from '../assignment.model';
+import {FormBuilder, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-add-assignment',
@@ -18,10 +19,23 @@ export class AddAssignmentComponent implements OnInit {
   classe = '';
   image = '';
   dateDeRendu!: Date;
+
+  firstFormGroup = this._formBuilder.group({
+    firstCtrl: ['', Validators.required],
+  });
+  secondFormGroup = this._formBuilder.group({
+    secondCtrl: ['', Validators.required],
+  });
+  isLinear = false;
+
+
+
+
   constructor(
     private assignmentsService: AssignmentsService,
     private route: ActivatedRoute,
-    private router:Router
+    private router:Router,
+    private _formBuilder: FormBuilder
   ) {}
 
   ngOnInit(): void {}

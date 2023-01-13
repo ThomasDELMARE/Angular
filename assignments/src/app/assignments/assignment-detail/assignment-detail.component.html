@@ -77,21 +77,24 @@
     Devoir rendu
   </mat-checkbox>
 
-  <button
-    class="actionButtons"
-    mat-flat-button
-    color="primary"
-    (click)="modifierAssignment(assignmentTransmis)"
-  >
-    Modifier
-  </button>
+  <div *ngIf="isAdmin">
+    <button
+      class="actionButtons"
+      mat-flat-button
+      color="primary"
+      (click)="modifierAssignment(assignmentTransmis)"
+    >
+      Modifier
+    </button>
 
-  <button
-    class="actionButtons"
-    mat-flat-button
-    color="warn"
-    (click)="onDeleteAssignment()"
-  >
-    Supprimer
-  </button>
+    <button
+      class="actionButtons"
+      mat-flat-button
+      color="warn"
+      (click)="onDeleteAssignment()"
+    >
+      Supprimer
+    </button>
+  </div>
+
 </mat-card>

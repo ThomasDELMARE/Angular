@@ -7,6 +7,7 @@ import { MatSort, Sort } from '@angular/material/sort';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import {Router} from '@angular/router';
 import { AuthService } from '../shared/services/auth.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-assignments',
@@ -30,9 +31,10 @@ export class AssignmentsComponent implements AfterViewInit, OnInit {
   @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: false}) sort: MatSort;
   
-  constructor(private assignmentsService:AssignmentsService, private _liveAnnouncer: LiveAnnouncer, private router: Router, private authService: AuthService) { }
+  constructor(private assignmentsService:AssignmentsService, private _liveAnnouncer: LiveAnnouncer, private router: Router, private authService: AuthService, private _snackBar: MatSnackBar) { }
 
   ngOnInit() {
+    this._snackBar.dismiss();
     this.dataSource.sortData = this.sortData();
   }
 

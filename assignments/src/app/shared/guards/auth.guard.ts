@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
+import { CanActivate, Router, UrlTree } from '@angular/router';
 import { Observable } from 'rxjs';
 import { AuthService } from '../services/auth.service';
 
@@ -22,10 +22,11 @@ export class AuthGuard implements CanActivate {
         if(isLogged) {
           return true;
         } else {
-          this._snackBar.open("Navigation refusée, connectez-vous avec un compte administrateur", "Fermer", {
-            duration: 3000
+          this._snackBar.open("Navigation refusée, connectez-vous !", "Fermer", {
+            duration: 2000
           });
-          this.router.navigate(['']);
+
+          // this.router.navigate(['']);
           return false;
         }
       })

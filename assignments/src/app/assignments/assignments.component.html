@@ -1,12 +1,9 @@
-<nav>
-  <button mat-flat-button color="primary" class="logoutButton" (click)="logOut()">Se déconnecter</button>
-</nav>
 <a routerLink="/home">
   <h1 class="titre">{{titre}}</h1>
 </a>
 <main class="main-wrapper">
   <div class="table-action">
-    <mat-form-field class="recherche">
+    <mat-form-field class="recherche" appearance="outline">
       <input
         matInput
         type="text"

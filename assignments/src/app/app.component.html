@@ -1,5 +1,48 @@
+<mat-sidenav-container>
+  <mat-sidenav #sidenav>
+    <mat-toolbar style="background: transparent;">
+      <mat-toolbar-row>
+          <button mat-icon-button (click)="sidenav.close();">
+            <mat-icon>menu</mat-icon>
+        </button>
+        <h2>Assignments</h2>
+      </mat-toolbar-row>
+    </mat-toolbar>
 
-<!--
-  Affiche le composant qui correspond à la route
--->
-<router-outlet></router-outlet>
+    <mat-nav-list>
+      <a
+        mat-list-item
+        (click)="sidenav.close()"
+        [routerLink]="['/home']"
+        routerLinkActive="list-item-active">
+        Home
+      </a>
+
+      <a
+        mat-list-item
+        (click)="sidenav.close()"
+        [routerLink]="['/add']"
+        routerLinkActive="list-item-active">
+        Add
+      </a>
+
+      <a
+        mat-list-item
+        (click)="sidenav.close()"
+        [routerLink]="['/']"
+        routerLinkActive="list-item-active">
+        Login
+      </a>
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <app-menubar *ngIf="!isLoginPage" (openSidenav)="sidenav.open()"></app-menubar>
+    <div *ngIf="!isLoginPage" class="spacer"></div>
+    <!--
+      Affiche le composant qui correspond à la route
+    -->
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+
+</mat-sidenav-container>

@@ -1,0 +1,8 @@
+.bar-spacer {
+  flex: 1 1 auto;
+}
+
+mat-toolbar {
+  background-color: #AAC4FB;
+  background-image: linear-gradient(62deg, #AAC4FB 0%, #E0C3FC 100%);
+}

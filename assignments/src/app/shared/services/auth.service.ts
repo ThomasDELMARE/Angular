@@ -14,7 +14,9 @@ export class AuthService {
   user: User|undefined;
   userIsAdmin = false;
 
-  constructor(private loginService:LoginService, private router: Router){}
+  constructor(private loginService:LoginService, private router: Router){
+    (!!localStorage.getItem('jwtToken')) ? this.loggedIn = true : this.loggedIn = false;
+  }
 
   // Dans la vraie vie (dans le projet à faire), on
   // passerait login et password.
@@ -43,8 +45,8 @@ export class AuthService {
 
         localStorage.setItem("jwtToken", this.user.jwtToken);
 
-        // On ne veut rediriger sur Home que lorsque l'on fait une connexion depuis la page de connexion
-        if(this.router.url == "/"){
+        // On veut rediriger sur Home que lorsque l'on fait une connexion depuis la page de connexion
+        if(this.router.url === "/"){
           this.router.navigate(['./home']);
         }
       }
@@ -61,14 +63,18 @@ export class AuthService {
     localStorage.removeItem("jwtToken");
     this.loggedIn = false;
     this.userIsAdmin = false;
+    this.router.navigate(['/']);
   }
 
   loggedAsAdmin() {
     this.userIsAdmin = true;
+    this.loggedIn = true;
+    localStorage.setItem('loggedIn', 'true')
   }
 
   loggedInAsUser() {
     this.loggedIn = true;
+    localStorage.setItem('loggedIn', 'true')
   }
 
   isLoggedIn(): Promise<boolean> {

@@ -36,6 +36,10 @@ import { LoginGuard } from './shared/guards/login.guard';
 import { AuthGuard } from './shared/guards/auth.guard';
 import { AdminGuard } from './shared/guards/admin.guard';
 import { AuthService } from './shared/services/auth.service';
+import { MenubarComponent } from './menubar/menubar.component';
+import { LayoutModule } from '@angular/cdk/layout';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatSidenavModule } from '@angular/material/sidenav';
 
 const routes: Routes = [
   {
@@ -72,7 +76,8 @@ const routes: Routes = [
     AssignmentDetailComponent,
     AddAssignmentComponent,
     EditAssignmentComponent,
-    LoginComponent
+    LoginComponent,
+    MenubarComponent,
   ],
   imports: [
     BrowserModule,
@@ -87,7 +92,10 @@ const routes: Routes = [
     Ng2SearchPipeModule,
     MatPaginatorModule,
     MatSortModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    LayoutModule,
+    MatToolbarModule,
+    MatSidenavModule
   ],
   providers: [
     AuthService, AuthGuard, AdminGuard, LoginGuard

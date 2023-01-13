@@ -150,10 +150,4 @@ export class AssignmentsComponent implements AfterViewInit, OnInit {
       this.dataSource.paginator.firstPage();
     }
   }
-
-  logOut() {
-    console.log("Déconnexion demandée")
-    this.authService.logOut();
-    this.router.navigate(['./']);
-  }
 }

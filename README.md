@@ -1,5 +1,22 @@
 # Application de devoirs
 
+## Auteurs 
+- DELMARE Thomas
+- ELALAOUI Hasnaa
+(Tous deux étudiants en Master2 MIAGE à l'Université Côte d'Azur)
+
+## Présentation du projet
+Ce projet consiste en une application web de gestion des devoirs à rendre. 
+Nous retrouvons sur la page d'accueil la liste de tous les devoirs ainsi que des informations les concernant comme le nom de l'étudiant concerné par le devoir, sa classe, la matière, la note obtenue, le professeur, la date de rendu ainsi que si le devoir a été rendu ou non. 
+
+## Technologies utilisées
+L'application a été réalisée en utilisant plusieurs technologies : 
+- Angular pour l'interface et l'api
+- Mongoose pour la base de données
+- Heroku pour l'hébergement de l'application
+- Github pour l'hébergement du code
+
+## Description du projet
 Le projet se décompose en deux parties :
 - L'[API](https://github.com/ThomasDELMARE/Angular/tree/main/api)
 - Le site [Application de devoirs](https://github.com/ThomasDELMARE/Angular/tree/main/assignments) 

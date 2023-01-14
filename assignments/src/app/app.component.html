@@ -10,28 +10,28 @@
     </mat-toolbar>
 
     <mat-nav-list>
-      <a
+      <a *ngIf="!isLoginPage"
         mat-list-item
         (click)="sidenav.close()"
         [routerLink]="['/home']"
         routerLinkActive="list-item-active">
-        Home
+        Accueil
       </a>
 
-      <a
+      <a *ngIf="!isLoginPage"
         mat-list-item
         (click)="sidenav.close()"
         [routerLink]="['/add']"
         routerLinkActive="list-item-active">
-        Add
+        Ajout d'un devoir
       </a>
 
-      <a
+      <a *ngIf="isLoginPage"
         mat-list-item
         (click)="sidenav.close()"
         [routerLink]="['/']"
         routerLinkActive="list-item-active">
-        Login
+        Connexion
       </a>
     </mat-nav-list>
   </mat-sidenav>

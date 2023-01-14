@@ -60,6 +60,7 @@ export class AuthService {
 
   logOut() {
     localStorage.removeItem("jwtToken");
+    localStorage.removeItem("loggedIn");
     this.loggedIn = false;
     this.userIsAdmin = false;
     this.router.navigate(['/']);

@@ -7,7 +7,7 @@
 
 
 
-  <button mat-raised-button (click)="isLinear = !isLinear" id="toggle-linear">
+  <!-- <button mat-raised-button (click)="isLinear = !isLinear" id="toggle-linear">
     {{!isLinear ? 'Enable linear mode' : 'Disable linear mode'}}
   </button>
   <mat-stepper orientation="vertical" [linear]="isLinear" #stepper>
@@ -44,10 +44,8 @@
         <button mat-button (click)="stepper.reset()">Reset</button>
       </div>
     </mat-step>
-  </mat-stepper>
+  </mat-stepper> -->
 
-
-<!-- 
 
   <form
     (submit)="onSubmit(); assignmentForm.reset()"
@@ -101,6 +99,6 @@
     </mat-form-field>
 
     <button mat-flat-button color="primary" [disabled]="((!nomDevoir)||(!professeur)||(!description)||(!matiere)||(!classe)||(!image)||(!dateDeRendu))"> Ajouter un devoir</button>
-  </form> -->
+  </form>
   
 </div>

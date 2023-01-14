@@ -1,41 +1,41 @@
-<div class="container" *ngIf="assignment">
-  <h1 class="mainTitle">Edition de l'assignment {{assignment.nom}}</h1>
+<div class="content-wrapper" *ngIf="assignment">
+  <h1 class="titre">Edition de l'assignment {{assignment.nom}}</h1>
   <form ngForm class="form" #formupdate (submit)="onSaveAssignment(); formupdate.reset(); ">
 
-    <mat-form-field>
+    <mat-form-field appearance="outline">
       <mat-label>Nom du devoir</mat-label>
       <input matInput placeholder="Edition du nom du devoir" [(ngModel)]="nomDevoir" name="nom" />
     </mat-form-field>
   
-    <mat-form-field>
+    <mat-form-field appearance="outline">
       <mat-label>Nom du professeur</mat-label>
       <input matInput [(ngModel)]="professeur" name="professeur" />
     </mat-form-field>
   
-    <mat-form-field>
+    <mat-form-field appearance="outline">
       <mat-label>Description du devoir</mat-label>
-      <input matInput [(ngModel)]="description" name="description" />
+      <textarea matInput [(ngModel)]="description" name="description"></textarea>
     </mat-form-field>
   
   
-    <mat-form-field>
+    <mat-form-field appearance="outline">
       <mat-label>Nom de la matière</mat-label>
       <input matInput [(ngModel)]="matiere" name="matiere" />
     </mat-form-field>
   
     
-    <mat-form-field>
+    <mat-form-field appearance="outline">
       <mat-label>Classe</mat-label>
       <input matInput [(ngModel)]="classe" name="classe" />
     </mat-form-field>
   
     
-    <mat-form-field>
+    <mat-form-field appearance="outline">
       <mat-label>Lien de la photo du professeur</mat-label>
       <input matInput [(ngModel)]="image" name="image" />
     </mat-form-field>
   
-    <mat-form-field appearance="fill">
+    <mat-form-field appearance="outline">
       <mat-label>Date de rendu</mat-label>
       <input
         matInput
@@ -48,7 +48,7 @@
       <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
 
-    <button mat-raised-button color="primary"  [disabled]="((!nomDevoir)||(!professeur)||(!description)||(!matiere)||(!classe)||(!image)||(!dateDeRendu))">
+    <button mat-flat-button color="primary" [disabled]="((!nomDevoir)||(!professeur)||(!description)||(!matiere)||(!classe)||(!image)||(!dateDeRendu))">
       Sauvegarder
     </button>
   </form>

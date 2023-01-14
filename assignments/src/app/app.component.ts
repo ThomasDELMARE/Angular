@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component, ViewChild } from '@angular/core';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { filter } from 'rxjs/operators';
 import { AuthService } from './shared/services/auth.service';
 
 @Component({
@@ -9,9 +10,23 @@ import { AuthService } from './shared/services/auth.service';
 })
 export class AppComponent {
   title = 'Gestion des assignments';
-  isLogin: boolean = false;
+  isLoginPage: boolean;
 
-  constructor(private authService: AuthService,  private router: Router) {}
+  @ViewChild('sidenav') sidenav: any;
+
+  constructor(private authService: AuthService, private router: Router) {
+    console.log(this.router.url);
+    
+    this.router.url === '/' ?
+      this.isLoginPage = true :
+      this.isLoginPage = false;
+
+    this.router.events.pipe(filter((event => event instanceof NavigationEnd))).subscribe((route) => {
+      (route as any).url === '/' ?
+        this.isLoginPage = true :
+        this.isLoginPage = false;
+    });
+  }
 
   logOut() {
     console.log("Déconnexion demandée")

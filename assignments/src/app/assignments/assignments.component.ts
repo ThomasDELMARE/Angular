@@ -23,7 +23,6 @@ export class AssignmentsComponent implements AfterViewInit, OnInit {
   assignments:Assignment[] = [];
   dataSource = new MatTableDataSource<Assignment>(this.assignments);
   totalAssignments: number = this.assignments.length;
-  filterValues: any = {};
   rendu: boolean;
   nonRendu: boolean;
   filterBoolean: boolean;
@@ -43,7 +42,7 @@ export class AssignmentsComponent implements AfterViewInit, OnInit {
     .subscribe((assignments: Assignment[]) => {
       this.assignments = assignments
       this.dataSource = new MatTableDataSource<Assignment>(assignments);
-
+      
       this.dataSource.sortingDataAccessor = (item, property) => {
         switch(property) {
           case 'nom': return item.nom;
@@ -58,18 +57,8 @@ export class AssignmentsComponent implements AfterViewInit, OnInit {
         }
       }
 
-      this.dataSource.filterPredicate = ((data: Assignment, filter: string): boolean => {
-        
-        if(filter == "true") this.filterBoolean = true;
-        if(filter == "false") this.filterBoolean = false;
-        
-        return data.rendu == this.filterBoolean;
-      })
-
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
-
-      this.filterValues = assignments;
     });
   }
 
@@ -116,19 +105,16 @@ export class AssignmentsComponent implements AfterViewInit, OnInit {
     return sortFunction;
    }
 
-  announceSortChange(sortState: Sort) {
-    // TODO : On en fait quoi ?
-    if (sortState.direction) {
-      this._liveAnnouncer.announce(`Sorted ${sortState.direction}ending`);
-    } else {
-      this._liveAnnouncer.announce('Sorting cleared');
-    }
-
+  announceSortChange() {
     this.dataSource.sortData = this.sortData();
   }
 
-  rechercher = (value: any) => {
-    this.dataSource.filter = value.target.value.trim().toLocaleLowerCase();
+  rechercher(value: any) {
+    console.log(this.dataSource)
+    const filterValue = (value.target as HTMLInputElement).value;
+    // this.dataSource = new MatTableDataSource<Assignment>(this.assignments);
+    // this.dataSource.sortData = this.sortData();
+    this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
   assignmentClique(assignment:Assignment){
@@ -139,7 +125,9 @@ export class AssignmentsComponent implements AfterViewInit, OnInit {
     this.router.navigate(['.//add/']);
   }
 
+  // Permet d'afficher les devoirs non rendus seulement
   applyFilter(isChecked: boolean, filterValue: string) {
+    console.log(this.dataSource)
     if(!isChecked) {
       this.dataSource.filter = "";
     }

@@ -20,16 +20,20 @@ export class AddAssignmentComponent implements OnInit {
   image = '';
   dateDeRendu!: Date;
 
-  firstFormGroup = this._formBuilder.group({
-    firstCtrl: ['', Validators.required],
+  devoirForm = this._formBuilder.group({
+    nomDevoir: ['', Validators.required],
+    description: ['', Validators.required],
+    dateDeRendu: [null, Validators.required]
   });
-  secondFormGroup = this._formBuilder.group({
-    secondCtrl: ['', Validators.required],
+  professeurForm = this._formBuilder.group({
+    professeur: ['', Validators.required],
+    image: ['', Validators.required]
+  });
+  classeForm = this._formBuilder.group({
+    classe: ['', Validators.required],
+    matiere: ['', Validators.required]
   });
   isLinear = false;
-
-
-
 
   constructor(
     private assignmentsService: AssignmentsService,
@@ -40,37 +44,27 @@ export class AddAssignmentComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  onSubmit() {
-    console.log(
-      "Ajout de l'assignment en cours"
-    );
-
+  ajouterDevoir() {
     // On ajoute un nouvel assignment
     let nouvelAssignment = new Assignment();
-    nouvelAssignment.nom = this.nomDevoir;
-    nouvelAssignment.dateDeRendu = this.dateDeRendu;
+    nouvelAssignment.nom = this.devoirForm.value.nomDevoir || "";
+    nouvelAssignment.description = this.devoirForm.value.description || "";
+    nouvelAssignment.dateDeRendu = this.devoirForm.value.dateDeRendu || new Date();
+    nouvelAssignment.prof = this.professeurForm.value.professeur || "";
+    nouvelAssignment.image = this.professeurForm.value.image || "";
+    nouvelAssignment.classe = this.classeForm.value.classe || "";
+    nouvelAssignment.matiere = this.classeForm.value.matiere || "";
     nouvelAssignment.rendu = false;
-    nouvelAssignment.prof = this.professeur;
-    nouvelAssignment.description = this.description;
-    nouvelAssignment.matiere = this.matiere;
-    nouvelAssignment.classe = this.classe;
-    nouvelAssignment.image = this.image;
 
     this.assignmentsService
       .getHighestId()
       .subscribe((foundId) => {
-        console.log("ici", foundId)
         nouvelAssignment.id = foundId;
 
-        console.log("ID ", nouvelAssignment.id)
-
-        // TODO : Vraiment pas fan de ça, faire des calls dans des calls ça pueee
-        // Faudrait le bouger dans une autre fonction et voir l'impact
         this.assignmentsService
         .addAssignment(nouvelAssignment)
         .subscribe((reponse) => {
           console.log(reponse.message);
-          this.router.navigate(['/home']);
         });
       });
   }

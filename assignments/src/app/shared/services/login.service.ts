@@ -14,11 +14,12 @@ export class LoginService {
   uri = "http://localhost:8010/api/users";
   shortUri = "http://localhost:8010/api";
 
+  // Renvoie tous les utilisateurs
   getUsers():Observable<User[]> {
-    //return of(this.Users);
     return this.http.get<User[]>(this.uri);
   }
 
+  // Renvoie un utilisateur via login et password
   getUser(login:string, password:string):Observable<User|undefined> {
     const requestParams = new HttpParams({
       fromObject: {
@@ -29,27 +30,20 @@ export class LoginService {
     return this.http.get<User>(`${this.uri}/fetch`, {params:requestParams});
   }
 
+  // Ajoute un utilisateur
   addUser(User:User):Observable<any> {
-    //this.Users.push(User);
     // ex utilisation du service de log
     this.loggingService.log(User.login, "ajouté");
-
-    //return of("User ajouté");
     return this.http.post(this.uri, User);
   }
 
+  // Met à jour les données d'un utilisateur
   updateUser(User:User):Observable<any> {
-    // Rien à faire pour le moment, plus tard
-    // il faudra faire une requête HTTP PUT
-    // sur un web service distant etc.
-
-      // ex utilisation du service de log
-      this.loggingService.log(User.login, "modifié");
-
-    //return of("User modifié");
+    this.loggingService.log(User.login, "modifié");
     return this.http.put<User>(this.uri, User);
   }
 
+  // Renvoie l'id le plus élevé
   getHighestId():Observable<any> {
     return this.http.get<string>(`${this.shortUri}/highestUserId`);
   }

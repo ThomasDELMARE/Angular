@@ -110,10 +110,7 @@ export class AssignmentsComponent implements AfterViewInit, OnInit {
   }
 
   rechercher(value: any) {
-    console.log(this.dataSource)
     const filterValue = (value.target as HTMLInputElement).value;
-    // this.dataSource = new MatTableDataSource<Assignment>(this.assignments);
-    // this.dataSource.sortData = this.sortData();
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
@@ -127,7 +124,6 @@ export class AssignmentsComponent implements AfterViewInit, OnInit {
 
   // Permet d'afficher les devoirs non rendus seulement
   applyFilter(isChecked: boolean, filterValue: string) {
-    console.log(this.dataSource)
     if(!isChecked) {
       this.dataSource.filter = "";
     }

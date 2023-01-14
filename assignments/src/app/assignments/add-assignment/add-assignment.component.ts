@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
 import { AssignmentsService } from 'src/app/shared/services/assignments.service';
 import { Assignment } from '../assignment.model';
 import {FormBuilder, Validators} from '@angular/forms';
@@ -118,7 +117,6 @@ export class AddAssignmentComponent implements OnInit {
         this.assignmentsService
         .addAssignment(nouvelAssignment)
         .subscribe((reponse) => {
-          console.log(reponse.message);
           this.openSnackBar('Ajout dans la base de données réussi');
         });
       });

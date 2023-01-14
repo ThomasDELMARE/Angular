@@ -15,5 +15,4 @@ export class MenubarComponent {
   logout() {
     this.authService.logOut();
   }
-
 }

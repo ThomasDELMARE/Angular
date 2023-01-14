@@ -1,5 +1,5 @@
 <div class="content-wrapper" *ngIf="assignment">
-  <h1 class="titre">Edition de l'assignment {{assignment.nom}}</h1>
+  <h1 class="titre">Edition du devoir {{assignment.nom}}</h1>
   <form ngForm class="form" #formupdate (submit)="onSaveAssignment(); formupdate.reset(); ">
 
     <mat-form-field appearance="outline">

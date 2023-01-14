@@ -9,7 +9,7 @@ import { AuthService } from './shared/services/auth.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'Gestion des assignments';
+  title = 'Gestion des devoirs';
   isLoginPage: boolean;
 
   @ViewChild('sidenav') sidenav: any;

@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { User } from '../../login/user.model';
 import { LoginService } from './login.service';
 import jwt_decode from "jwt-decode";
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Injectable({
   providedIn: 'root',
@@ -14,12 +15,11 @@ export class AuthService {
   user: User|undefined;
   userIsAdmin = false;
 
-  constructor(private loginService:LoginService, private router: Router){
+  constructor(private loginService:LoginService, private router: Router, private _snackBar: MatSnackBar){
     (!!localStorage.getItem('jwtToken')) ? this.loggedIn = true : this.loggedIn = false;
   }
 
-  // Dans la vraie vie (dans le projet à faire), on
-  // passerait login et password.
+  // Permet de se connecter à l'application et de déterminer les droits de l'utilisateur
   logIn(login:string, password:string) {
     this.loginService.getUser(login, password)
     .subscribe((userFetched) => {
@@ -40,12 +40,14 @@ export class AuthService {
         }
       }
       else{
-        console.log("User not fetched")
-        // TODO : Ajouter snackbar
+        this._snackBar.open("User not fetched", "Fermer", {
+          duration: 3000
+        });
       }
     });
   }
 
+  // On supprime les données du localStorage permettant de se reconnecter automatiquement
   logOut() {
     localStorage.removeItem("jwtToken");
     localStorage.removeItem("loggedIn");

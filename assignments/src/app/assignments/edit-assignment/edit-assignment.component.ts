@@ -28,10 +28,6 @@ export class EditAssignmentComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // Exemple de récupération de ce qui suit le ? dans l'URL
-    // const nom = this.route.snapshot.queryParams['nom'];
-    // fragment (ce qui suit le # dans l'URL)
-    // const fragment = this.route.snapshot.fragment;
     this.getAssignment();
   }
 
@@ -42,8 +38,6 @@ export class EditAssignmentComponent implements OnInit {
   }
 
   getAssignment() {
-    // on récupère l'id dans l'url
-    // Le + force la conversion en number
     const id: number = +this.route.snapshot.params['id'];
     this.assignmentsService.getAssignment(id).subscribe((assignment) => {
       if (!assignment) return;
@@ -62,7 +56,6 @@ export class EditAssignmentComponent implements OnInit {
     if (!this.nomDevoir || !this.professeur|| !this.description|| !this.matiere|| !this.classe|| !this.image|| !this.dateDeRendu) return;
     if (!this.assignment) return;
 
-    // On modifie l'assignment
     this.assignment.nom = this.nomDevoir;
     this.assignment.dateDeRendu = this.dateDeRendu;
     this.assignment.prof = this.professeur;
@@ -71,15 +64,9 @@ export class EditAssignmentComponent implements OnInit {
     this.assignment.classe = this.classe; 
     this.assignment.image = this.image;
 
-    // On envoie l'assignment modifié au service
-    // qui va faire la requête HTTP
-    // On va naviguer vers la page d'accueil
     this.assignmentsService
       .updateAssignment(this.assignment)
       .subscribe((reponse) => {
-        console.log(reponse.message);
-        // et on navigue vers la page d'accueil qui affiche
-        // la liste des assignments
         this.openSnackBar('Modification du devoir enregistré en base de données');
       });
   }

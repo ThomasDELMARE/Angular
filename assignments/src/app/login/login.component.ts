@@ -16,6 +16,7 @@ export class LoginComponent {
 
   constructor(private authService:AuthService) {}
 
+  // Méthode permettant d'envoyer la requête d'authentification de l'utilisateur
   loginUser() {
     this.authService.logIn(this.login, this.password) 
   }

@@ -1,8 +1,8 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AssignmentsService } from 'src/app/shared/services/assignments.service';
 import { Assignment } from '../assignment.model';
-import { MatSnackBar, MatSnackBarRef } from '@angular/material/snack-bar';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { AuthService } from 'src/app/shared/services/auth.service';
 
 @Component({
@@ -23,8 +23,6 @@ export class AssignmentDetailComponent implements OnInit {
     private authService: AuthService
   ) { }
 
-  // Appelé AVANT l'affichage du composant, fait partie du
-  // cycle de vie du composant
   ngOnInit(): void {
     this.authService.isAdmin()
       .then((isAdmin: any) => {
@@ -41,8 +39,6 @@ export class AssignmentDetailComponent implements OnInit {
   }
 
   getAssignment() {
-    // on récupère l'id dans l'url
-    // Le + force la conversion en number
     const id: number = +this.route.snapshot.params['id'];
     this.assignmentsService.getAssignment(id).subscribe((assignment) => {
       this.assignmentTransmis = assignment;
@@ -55,7 +51,6 @@ export class AssignmentDetailComponent implements OnInit {
     this.assignmentsService
       .updateAssignment(this.assignmentTransmis)
       .subscribe((message) => {
-        console.log(message);
         this.router.navigate(['/home']);
       });
   }
@@ -73,11 +68,8 @@ export class AssignmentDetailComponent implements OnInit {
       this.assignmentsService
         .deleteAssignment(this.assignmentTransmis)
         .subscribe((reponse) => {
-          console.log(reponse.message);
           this.openSnackBar('Suppression effectuée');
           this.assignmentTransmis = undefined;
-          // et on navigue vers la page d'accueil qui affiche
-          // la liste des assignments
           this.router.navigate(['/home']);
         });
     } else {

@@ -47,7 +47,7 @@ function postAssignment(req, res){
 function updateAssignment(req, res) {
     Assignment.findByIdAndUpdate(req.body._id, req.body, {new: true}, (err, assignment) => {
         if (err) {
-            console.log(err);
+            console.error(err);
             res.send(err)
         } else {
           res.json({message: 'updated'})

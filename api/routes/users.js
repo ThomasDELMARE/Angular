@@ -46,10 +46,9 @@ function postUser(req, res){
 
 // Update d'un assignment (PUT)
 function updateUser(req, res) {
-    console.log(req.body);
     User.findByIdAndUpdate(req.body._id, req.body, {new: true}, (err, user) => {
         if (err) {
-            console.log(err);
+            console.error(err);
             res.send(err)
         } else {
           res.json({message: 'updated'})

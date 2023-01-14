@@ -15,8 +15,6 @@ export class AppComponent {
   @ViewChild('sidenav') sidenav: any;
 
   constructor(private authService: AuthService, private router: Router) {
-    console.log(this.router.url);
-    
     this.router.url === '/' ?
       this.isLoginPage = true :
       this.isLoginPage = false;
@@ -29,7 +27,6 @@ export class AppComponent {
   }
 
   logOut() {
-    console.log("Déconnexion demandée")
     this.authService.logOut();
     this.router.navigate(['./']);
   }

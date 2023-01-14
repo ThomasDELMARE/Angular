@@ -35,11 +35,6 @@ function postAssignment(req, res){
     assignment.image = req.body.image;
     assignment.note = null;
 
-    console.log(assignment.id)
-
-    console.log("POST assignment reçu :");
-    console.log(assignment)
-
     assignment.save( (err) => {
         if(err){
             res.send('cant post assignment ', err);
@@ -50,8 +45,6 @@ function postAssignment(req, res){
 
 // Update d'un assignment (PUT)
 function updateAssignment(req, res) {
-    console.log("UPDATE recu assignment : ");
-    console.log(req.body);
     Assignment.findByIdAndUpdate(req.body._id, req.body, {new: true}, (err, assignment) => {
         if (err) {
             console.log(err);
@@ -59,8 +52,6 @@ function updateAssignment(req, res) {
         } else {
           res.json({message: 'updated'})
         }
-
-      // console.log('updated ', assignment)
     });
 
 }
@@ -91,8 +82,6 @@ function getHighestId(req, res){
                 highestId = foundId;
             }
         }
-
-        console.log("Higher id found = ", highestId);
 
         res.send(highestId.toString());
     });

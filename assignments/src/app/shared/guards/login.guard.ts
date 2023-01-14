@@ -19,7 +19,6 @@ export class LoginGuard implements CanActivate {
     
       return this.authService.isLoggedIn()
       .then((loggedIn: boolean)  => {
-        console.log("Login Guard: " + loggedIn);
 
         if(loggedIn) {
           // Si on est loggé, on redirige vers la page d'accueil

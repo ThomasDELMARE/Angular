@@ -21,26 +21,16 @@ export class AuthService {
   // Dans la vraie vie (dans le projet à faire), on
   // passerait login et password.
   logIn(login:string, password:string) {
-    console.log("LogIN function value :", this.loggedIn)
-    console.log("LogIN params :", login, password)
-    
     this.loginService.getUser(login, password)
     .subscribe((userFetched) => {
       this.user = userFetched
 
       if(this.user != null) {
-        console.log("User fetched", this.user)
         this.loggedInAsUser();
 
         if(this.user.admin == true){
-          console.log("User is admin")
           this.loggedAsAdmin();
         }
-        else {
-          console.log("User is not admin");
-        }
-
-        console.log(this.user)
 
         localStorage.setItem("jwtToken", this.user.jwtToken);
 
@@ -53,8 +43,6 @@ export class AuthService {
         console.log("User not fetched")
         // TODO : Ajouter snackbar
       }
-
-      console.log("Final values : LogIn ", this.loggedIn, " Admin : ", this.userIsAdmin)
     });
   }
 
@@ -90,8 +78,6 @@ export class AuthService {
         decryptedToken = null;
       }
 
-      console.log(decryptedToken);
-
       if(decryptedToken != null) {
         var login = decryptedToken.login;
         var password = decryptedToken.password;
@@ -100,7 +86,6 @@ export class AuthService {
       }
     }
     
-    console.log("Logged in value via service: ", this.loggedIn)
     return new Promise((resolve, reject) => {
       resolve(this.loggedIn);
     });

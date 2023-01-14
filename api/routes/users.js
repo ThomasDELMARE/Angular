@@ -24,7 +24,6 @@ function getUser(req, res){
         // Create jwt token and store it in local storage
         var token = jwt.sign({ login:user?.login, password: user?.password }, config.secret, {});
         user.jwtToken = token;
-        console.log(user)
         res.json(user);
     })
 }
@@ -47,7 +46,6 @@ function postUser(req, res){
 
 // Update d'un assignment (PUT)
 function updateUser(req, res) {
-    console.log("UPDATE recu assignment : ");
     console.log(req.body);
     User.findByIdAndUpdate(req.body._id, req.body, {new: true}, (err, user) => {
         if (err) {

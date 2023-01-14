@@ -32,13 +32,18 @@
           <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
         <div>
-          <button mat-button matStepperNext [disabled]="((!nomDevoir)||(!description)||(!dateDeRendu))" >Suivant</button>
+          <button mat-button matStepperNext [disabled]="((!nomDevoir)||(!description)||(!dateDeRendu))">Suivant</button>
         </div>
       </form>
     </mat-step>
     
     <mat-step [stepControl]="professeurForm" label="Remplissez les données du professeur">
       <form [formGroup]="professeurForm">
+        <mat-form-field appearance="fill">
+          <mat-label>Nom de la matière</mat-label>
+          <input matInput formControlName="matiere" placeholder="Nom de la matière" [(ngModel)]="matiere"
+                 required>
+        </mat-form-field>
         <mat-form-field appearance="fill">
           <mat-label>Nom du professeur</mat-label>
           <input matInput formControlName="professeur" placeholder="Nom du professeur" [(ngModel)]="professeur"
@@ -49,9 +54,24 @@
           <input matInput formControlName="image" placeholder="Lien de la photo du professeur" [(ngModel)]="image"
                  required>
         </mat-form-field>
+
+        <br>Ou sélectionnez une matière enregistrée<br><br>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Matières enregistrées</mat-label>
+          <select #matieres (change)="onChangeMatiere(matieres.value)" name="selectMatiere" matNativeControl>
+            <option value="aucun">Aucun</option>
+            <option value="francais">Français - Monsieur Robert</option>
+            <option value="math">Mathématiques - Boukobza</option>
+            <option value="svt">SVT - Madame Fernandi</option>
+            <option value="anglais">Anglais - Madame Sisi</option>
+            <option value="angular">Angular - Monsieur Buffa</option>
+          </select>
+        </mat-form-field>
+
         <div>
           <button mat-button matStepperPrevious>Retour</button>
-          <button mat-button matStepperNext [disabled]="((!professeur)||(!image))">Suivant</button>
+          <button mat-button matStepperNext [disabled]="((!matiere)||(!professeur)||(!image))">Suivant</button>
         </div>
       </form>
     </mat-step>
@@ -63,14 +83,10 @@
           <input matInput formControlName="classe" placeholder="Nom de la classe" [(ngModel)]="classe"
                  required>
         </mat-form-field>
-        <mat-form-field appearance="fill">
-          <mat-label>Nom de la matière</mat-label>
-          <input matInput formControlName="matiere" placeholder="Nom de la matière" [(ngModel)]="matiere"
-                 required>
-        </mat-form-field>
+        
         <div>
           <button mat-button matStepperPrevious>Retour</button>
-          <button mat-button matStepperNext [disabled]="((!matiere)||(!classe))" (click)="ajouterDevoir()" >Ajouter devoir</button>
+          <button mat-button matStepperNext [disabled]="!classe" (click)="ajouterDevoir()" >Ajouter devoir</button>
         </div>
       </form>
     </mat-step>

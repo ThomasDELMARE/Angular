@@ -53,22 +53,4 @@ export class LoginService {
   getHighestId():Observable<any> {
     return this.http.get<string>(`${this.shortUri}/highestUserId`);
   }
-
-  /*
-
-  peuplerBD() {
-    dataPourPeuplerBD.forEach(a => {
-      let nouvelUser = new User();
-      nouvelUser.id = a.id;
-      nouvelUser.nom = a.nom;
-      nouvelUser.dateDeRendu = new Date(a.dateDeRendu);
-      nouvelUser.rendu = a.rendu;
-
-      this.addUser(nouvelUser)
-      .subscribe(msg => {
-        console.log(msg);
-      })
-    })
-  }
-  */
 }

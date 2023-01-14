@@ -70,7 +70,6 @@ export class AssignmentsComponent implements AfterViewInit, OnInit {
       this.dataSource.sort = this.sort;
 
       this.filterValues = assignments;
-      console.log(this.filterValues)
     });
   }
 

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AssignmentsService } from 'src/app/shared/services/assignments.service';
 import { Assignment } from '../assignment.model';
@@ -22,7 +23,8 @@ export class EditAssignmentComponent implements OnInit {
   constructor(
     private assignmentsService: AssignmentsService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private _snackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
@@ -31,6 +33,12 @@ export class EditAssignmentComponent implements OnInit {
     // fragment (ce qui suit le # dans l'URL)
     // const fragment = this.route.snapshot.fragment;
     this.getAssignment();
+  }
+
+  openSnackBar(message: string) {
+    this._snackBar.open(message, "Fermer", {
+      duration: 3000
+    });
   }
 
   getAssignment() {
@@ -72,7 +80,7 @@ export class EditAssignmentComponent implements OnInit {
         console.log(reponse.message);
         // et on navigue vers la page d'accueil qui affiche
         // la liste des assignments
-        this.router.navigate(['/home']);
+        this.openSnackBar('Modification du devoir enregistré en base de données');
       });
   }
 }

@@ -74,6 +74,7 @@ export class AssignmentDetailComponent implements OnInit {
         .deleteAssignment(this.assignmentTransmis)
         .subscribe((reponse) => {
           console.log(reponse.message);
+          this.openSnackBar('Suppression effectuée');
           this.assignmentTransmis = undefined;
           // et on navigue vers la page d'accueil qui affiche
           // la liste des assignments

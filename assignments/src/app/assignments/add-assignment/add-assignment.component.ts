@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AssignmentsService } from 'src/app/shared/services/assignments.service';
 import { Assignment } from '../assignment.model';
 import {FormBuilder, Validators} from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-add-assignment',
@@ -38,12 +39,17 @@ export class AddAssignmentComponent implements OnInit {
 
   constructor(
     private assignmentsService: AssignmentsService,
-    private route: ActivatedRoute,
-    private router:Router,
-    private _formBuilder: FormBuilder
+    private _formBuilder: FormBuilder,
+    private _snackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {}
+
+  openSnackBar(message: string) {
+    this._snackBar.open(message, "Fermer", {
+      duration: 3000
+    });
+  }
 
   onChangeMatiere(fetchedData: string): void {
     switch(fetchedData) { 
@@ -94,7 +100,6 @@ export class AddAssignmentComponent implements OnInit {
 
   ajouterDevoir() {
     // On ajoute un nouvel assignment
-    console.log("Nouvelle donnée !")
     let nouvelAssignment = new Assignment();
     nouvelAssignment.nom = this.devoirForm.value.nomDevoir || "";
     nouvelAssignment.description = this.devoirForm.value.description || "";
@@ -114,6 +119,7 @@ export class AddAssignmentComponent implements OnInit {
         .addAssignment(nouvelAssignment)
         .subscribe((reponse) => {
           console.log(reponse.message);
+          this.openSnackBar('Ajout dans la base de données réussi');
         });
       });
   }

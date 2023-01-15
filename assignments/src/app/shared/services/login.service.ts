@@ -14,8 +14,8 @@ export class LoginService {
               private _snackBar: MatSnackBar
     ) { }
 
-  uri = "http://localhost:8010/api/users";
-  shortUri = "http://localhost:8010/api";
+  uri = "https://apidevoir.onrender.com/api/users";
+  shortUri = "https://apidevoir.onrender.com/api";
 
   // Renvoie tous les utilisateurs
   getUsers():Observable<User[]> {

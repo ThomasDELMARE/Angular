@@ -10,8 +10,8 @@ export class AssignmentsService {
   constructor(private loggingService:LoggingService,
               private http:HttpClient) { }
 
-  uri = "http://localhost:8010/api/assignments";
-  shortUri = "http://localhost:8010/api";
+  uri = "https://apidevoir.onrender.com/api/assignments";
+  shortUri = "https://apidevoir.onrender.com/api";
 
   getAssignments():Observable<Assignment[]> {
     return this.http.get<Assignment[]>(this.uri);

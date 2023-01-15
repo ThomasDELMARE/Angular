@@ -12,8 +12,10 @@ Nous retrouvons sur la page d'accueil la liste de tous les devoirs ainsi que des
 ## Technologies utilisées
 L'application a été réalisée en utilisant plusieurs technologies : 
 - Angular pour l'interface et l'api
-- Mongoose pour la base de données
-- Heroku pour l'hébergement de l'application
+- Mongoose/MongoDB Atlas pour la base de données
+- Node/Express pour la base de données
+- Vercel pour l'hébergement de l'application
+- Render.com pour l'hébergement de l'API
 - Github pour l'hébergement du code
 
 ## Description du projet

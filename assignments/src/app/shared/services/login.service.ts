@@ -11,8 +11,8 @@ export class LoginService {
   constructor(private loggingService:LoggingService,
               private http:HttpClient) { }
 
-  uri = "http://localhost:8010/api/users";
-  shortUri = "http://localhost:8010/api";
+  uri = "https://apidevoir.onrender.com/api/users";
+  shortUri = "https://apidevoir.onrender.com/api";
 
   // Renvoie tous les utilisateurs
   getUsers():Observable<User[]> {

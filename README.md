@@ -14,7 +14,7 @@ L'application a été réalisée en utilisant plusieurs technologies :
 - Angular pour l'interface et l'api
 - Mongoose/MongoDB Atlas pour la base de données
 - Node/Express pour la base de données
-- Vercel pour l'hébergement de l'application
+- Vercel pour l'[hébergement de l'application](https://angular-cj29ybv86-thomasdelmare.vercel.app/)
 - Render.com pour l'hébergement de l'API
 - Github pour l'hébergement du code
 
@@ -84,6 +84,6 @@ Voici une liste des **fonctionnalités** du projet :
 
 <br>
 
-Lien du [site](https://devoir.onrender.com/) hébergé sur Render.com
+Lien du [site](https://angular-cj29ybv86-thomasdelmare.vercel.app/) hébergé sur Vercel.
 
-Lien de la [vidéo de présentation du projet]()
+Lien de la [vidéo de présentation du projet]().

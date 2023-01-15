@@ -86,4 +86,4 @@ Voici une liste des **fonctionnalités** du projet :
 
 Lien du [site](https://angular-cj29ybv86-thomasdelmare.vercel.app/) hébergé sur Vercel.
 
-Lien de la [vidéo de présentation du projet]().
+Lien de la [vidéo de présentation du projet](https://www.youtube.com/watch?v=w4pBkQ1kasM&ab_channel=Saltyman).

@@ -111,6 +111,7 @@ export class AssignmentsComponent implements AfterViewInit, OnInit {
 
   rechercher(value: any) {
     const filterValue = (value.target as HTMLInputElement).value;
+    console.log(filterValue);
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 

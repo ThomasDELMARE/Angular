@@ -107,22 +107,46 @@
       </span> 
     </mat-checkbox>
 
-    <button
-      class="actionButtons"
-      mat-flat-button
-      color="primary"
-      (click)="modifierAssignment(assignmentTransmis)"
-    >
-      Modifier
-    </button>
+    <div *ngIf="isAdmin; else nonAdminModifier">
+      <button
+        class="actionButtons"
+        mat-flat-button
+        color="primary"
+        (click)="modifierAssignment(assignmentTransmis)"
+      >
+        Modifier
+      </button>
 
-    <button
-      class="actionButtons"
-      mat-flat-button
-      color="warn"
-      (click)="onDeleteAssignment()"
-    >
-      Supprimer
-    </button>
+      <button
+        class="actionButtons"
+        mat-flat-button
+        color="warn"
+        (click)="onDeleteAssignment()"
+      >
+        Supprimer
+      </button>
+    </div>
+    <ng-template #nonAdminModifier>
+      <button
+        disabled
+        class="actionButtons"
+        mat-flat-button
+        color="primary"
+        (click)="modifierAssignment(assignmentTransmis)"
+      >
+        Modifier
+      </button>
+
+      <button
+        disabled
+        class="actionButtons"
+        mat-flat-button
+        color="warn"
+        (click)="onDeleteAssignment()"
+      >
+        Supprimer
+      </button>
+    </ng-template>
+    
   </mat-toolbar>
 </div>

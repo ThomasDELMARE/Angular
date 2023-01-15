@@ -3,16 +3,19 @@ import { Observable, of } from 'rxjs';
 import { User } from '../../login/user.model';
 import { LoggingService } from './logging.service';
 import { HttpClient, HttpParams } from '@angular/common/http';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoginService {
   constructor(private loggingService:LoggingService,
-              private http:HttpClient) { }
+              private http:HttpClient,
+              private _snackBar: MatSnackBar
+    ) { }
 
-  uri = "https://apidevoir.onrender.com/api/users";
-  shortUri = "https://apidevoir.onrender.com/api";
+  uri = "http://localhost:8010/api/users";
+  shortUri = "http://localhost:8010/api";
 
   // Renvoie tous les utilisateurs
   getUsers():Observable<User[]> {
@@ -27,7 +30,17 @@ export class LoginService {
         password: password
       }
     });
-    return this.http.get<User>(`${this.uri}/fetch`, {params:requestParams});
+
+    var response = this.http.get<User>(`${this.uri}/fetch`, {params:requestParams});
+
+    if(response == null){
+      this._snackBar.open("Utilisateur non trouvé, merci de réessayer", "Fermer", {
+        duration: 3000
+      });
+      
+    }
+
+    return response;
   }
 
   // Ajoute un utilisateur

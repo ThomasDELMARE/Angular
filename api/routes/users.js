@@ -20,11 +20,18 @@ function getUser(req, res){
     
     User.findOne({login: loginRequest, password: passwordRequest}, (err, user) =>{
         if(err){res.send(err)}
-        
-        // Create jwt token and store it in local storage
-        var token = jwt.sign({ login:user?.login, password: user?.password }, config.secret, {});
-        user.jwtToken = token;
-        res.json(user);
+
+        if(user != null){
+            console.log(user)
+            // Create jwt token and store it in local storage
+            var token = jwt.sign({ login:user?.login, password: user?.password }, config.secret, {});
+            user.jwtToken = token;
+            res.json(user);
+        }
+        else {
+            console.log("User not found")
+            res.send(null);
+        }
     })
 }
 

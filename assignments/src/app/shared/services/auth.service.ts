@@ -40,7 +40,7 @@ export class AuthService {
         }
       }
       else{
-        this._snackBar.open("User not fetched", "Fermer", {
+        this._snackBar.open("L'utilisateur n'a pas été trouvé, merci de réessayer", "Fermer", {
           duration: 3000
         });
       }
